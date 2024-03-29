@@ -242,44 +242,44 @@ M$Parameters = {
   (* Yukawa sector *)
   Ryl == {
     ParameterType -> External,  BlockName -> LYUKAWA, Indices -> {Index[Generation], Index[Generation]}, Description -> "Lepton Yukawa matrix (real part)",
-    Value -> {Ryl[1,1] -> 2.93502*10^-6, Ryl[2,2] -> 0.000606878, Ryl[3,3] -> 0.0102065}, Definitions -> {Ryl[i_,j_] :> 0  /; i!=j}
+    Value -> {Ryl[1,1] -> 2.93502*10^-6, Ryl[2,2] -> 0.000606878, Ryl[3,3] -> 0.0102065, Ryl[i_,j_] :> 0  /; i!=j}
   },
   Iyl == {
     ParameterType -> External, BlockName -> IMLYUKAWA, Indices -> {Index[Generation], Index[Generation]}, Description -> "Lepton Yukawa matrix (imaginary part)",
-    Definitions -> {Iyl[i_,j_] -> 0}
+    Value -> {Iyl[i_,j_] -> 0}
   },
   Ryv == {
     ParameterType -> External,  BlockName -> VYUKAWA, Indices -> {Index[Generation], Index[Generation]}, Description -> "Neutrino Yukawa matrix (real part, phi)",
-    Value -> {Ryv[1,1] -> 1.0*10^-9, Ryv[2,2] -> 1.1*^-9, Ryv[3,3] -> 1.2*^-9}, Definitions -> {Ryv[i_,j_] :> 0  /; i!=j}
+    Value -> {Ryv[1,1] -> 1.0*10^-9, Ryv[2,2] -> 1.1*^-9, Ryv[3,3] -> 1.2*^-9, Ryv[i_,j_] :> 0  /; i!=j}
   },
   Iyv == {
     ParameterType -> External, BlockName -> IMVYUKAWA, Indices -> {Index[Generation], Index[Generation]}, Description -> "Neutrino Yukawa matrix (imaginary part, phi)",
-    Definitions -> {Iyv[i_,j_] -> 0}
+    Value -> {Iyv[i_,j_] -> 0}
   },
   RyN == {
     ParameterType -> External,  BlockName -> NYUKAWA, Indices -> {Index[Generation], Index[Generation]}, Description -> "Neutrino Yukawa matrix (real part, chi)",
-    Value -> {RyN[1,1] -> 1.3*10^-9, RyN[2,2] -> 1.4*^-9, RyN[3,3] -> 1.5*^-9}, Definitions -> {RyN[i_,j_] :> 0  /; i!=j}
+    Value -> {RyN[1,1] -> 1.3*10^-9, RyN[2,2] -> 1.4*^-9, RyN[3,3] -> 1.5*^-9, RyN[i_,j_] :> 0  /; i!=j}
   },
   IyN == {
     ParameterType -> External, BlockName -> IMNYUKAWA, Indices -> {Index[Generation], Index[Generation]}, Description -> "Neutrino Yukawa matrix (imaginary part, chi)",
-    Definitions -> {IyN[i_,j_] -> 0}
+    Value -> {IyN[i_,j_] -> 0}
   },
   Ryu == {
     ParameterType -> External,  BlockName -> UYUKAWA, Indices -> {Index[Generation], Index[Generation]}, Description -> "Up quark Yukawa matrix (real part)",
-    Value -> {Ryu[1,1] -> 0.0000146464, Ryu[2,2] -> 0.00729448, Ryu[3,3] -> 0.987914}, Definitions -> {Ryu[i_,j_] :> 0 /; i!=j}
+    Value -> {Ryu[1,1] -> 0.0000146464, Ryu[2,2] -> 0.00729448, Ryu[3,3] -> 0.987914, Ryu[i_,j_] :> 0 /; i!=j}
   },
   Iyu == {
     ParameterType -> External, BlockName -> IMUYUKAWA, Indices -> {Index[Generation], Index[Generation]}, Description -> "Up quark Yukawa matrix (imaginary part)",
-    Definitions -> {Iyu[i_,j_] -> 0}
+    Value -> {Iyu[i_,j_] -> 0}
   },
   Ryd == {
     ParameterType -> External,  BlockName -> DYUKAWA, Indices -> {Index[Generation], Index[Generation]}, Description -> "Down quark Yukawa matrix (real part)",
-    Value -> {Ryd[1,1] -> 0.0000282008, Ryd[1,2] -> 6.53571*10^-6, Ryd[2,1] -> -0.000130973, Ryd[2,2] -> 0.000565134, Ryd[3,3] -> 0.0269953},
-    Definitions -> {Ryd[1,3] -> 0., Ryd[2,3] -> 0., Ryd[3,1] -> 0., Ryd[3,2] -> 0.}
+    Value -> {Ryd[1,1] -> 0.0000282008, Ryd[1,2] -> 6.53571*10^-6, Ryd[2,1] -> -0.000130973, Ryd[2,2] -> 0.000565134, Ryd[3,3] -> 0.0269953,
+    Ryd[1,3] -> 0, Ryd[2,3] -> 0, Ryd[3,1] -> 0., Ryd[3,2] -> 0}
   },
   Iyd == {
     ParameterType -> External, BlockName -> IMDYUKAWA, Indices -> {Index[Generation], Index[Generation]}, Description -> "Down quark Yukawa matrix (imaginary part)",
-    Definitions -> {Iyd[i_,j_] -> 0}
+    Value -> {Iyd[i_,j_] -> 0}
   },
 
   (* Internal Parameters *)
