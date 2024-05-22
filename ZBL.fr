@@ -10,7 +10,7 @@
 (* ************************** *)
 
 M$ModelName = "ZBL";
-M$Information = {Authors -> {"B. Fuks"}, Institutions -> {"LPTHE / Sorbonne U."}, Version -> "1.0", Date -> "24.04.2024", Emails -> {"fuks@lpthe.jussieu.fr"} };
+M$Information = {Authors -> {"B. Fuks"}, Institutions -> {"LPTHE / Sorbonne U."}, Version -> "1.0", Date -> "22.05.2024", Emails -> {"fuks@lpthe.jussieu.fr"} };
 FeynmanGauge = False;
 
 M$InteractionOrderHierarchy = { {QCD, 1},  {QED, 2}  };
@@ -47,12 +47,13 @@ M$MixingsDescription = {
 
    Mix["4a"] == {
     MixingMatrix -> {ULL, ULR}, BlockName -> {LLMIX, RLMIX},
-    MassBasis -> {l[1], l[2], l[3]}, GaugeBasis -> {{LL[2, 1], LL[2, 2], LL[2, 3]}, {lR[1], lR[2], lR[3]}}
+    MassBasis -> {{lmw[1], lmw[2], lmw[3]}, {lpw[1], lpw[2], lpw[3]}}, GaugeBasis -> { {LLw[2,1], LLw[2,2], LLw[2,3]}, {lRw[1], lRw[2], lRw[3]}}
    },
+
    Mix["4b"] == {
-     MassBasis -> {vl[1], vl[2], vl[3], Nl[1], Nl[2], Nl[3]},
-     GaugeBasis -> { {CC[LL][1,1], CC[LL][1,2], CC[LL][1,3], vR[1], vR[2], vR[3]}, {LL[1,1], LL[1,2], LL[1,3], CC[vR][1], CC[vR][2], CC[vR][3]} },
-     MixingMatrix -> {PMNSL, PMNSR}, BlockName -> {PMNSMIX, PMNSRMIX}
+     MassBasis -> {v0w[1], v0w[2], v0w[3], N0w[1], N0w[2], N0w[3]},
+     GaugeBasis -> { LLw[1,1], LLw[1,2], LLw[1,3], vRw[1], vRw[2], vRw[3] },
+     MixingMatrix -> UN, BlockName -> NUMIX
    }
 };
 
@@ -127,14 +128,17 @@ M$ClassesDescription = {
   (* Fermions: physical fields *)
   F[1] == {
     ClassName->vl, ClassMembers->{v1,v2,v3}, SelfConjugate->True, Indices->{Index[Generation]}, FlavorIndex->Generation,
+    WeylComponents->{v0w},
     Mass->0, Width->0, PDG->{12,14,16}, ParticleName->{"v1","v2","v3"}
   },
   F[2] == {
     ClassName->Nl, ClassMembers->{N1,N2,N3}, SelfConjugate->True, Indices->{Index[Generation]}, FlavorIndex->Generation,
+    WeylComponents->{N0w},
     Mass->0, Width->0, PDG->{9000012,9000014,9000016}, ParticleName->{"N1","N2","N3"}
   },
   F[3] == {
     ClassName->l, ClassMembers->{e,m,ta}, SelfConjugate->False, Indices->{Index[Generation]}, FlavorIndex->Generation, QuantumNumbers->{Q->-1},
+    WeylComponents->{lmw, lpwbar},
     Mass->{Ml,Me,MM,MTA}, Width->0, PDG->{11,13,15}, ParticleName->{"e-","mu-","tau-"}, AntiParticleName->{"e+","mu+","tau+"}
   },
   F[4] == {
@@ -146,19 +150,25 @@ M$ClassesDescription = {
     Mass->{Mdq,MD,MS,MB}, Width->0, PDG->{1,3,5}, ParticleName->{"d","s","b"}, AntiParticleName->{"d~","s~","b~"}
   },
 
-  (* Fermions: unphysical fields *)
-  F[11] == {
-    ClassName->LL, SelfConjugate->False, Unphysical->True, Indices->{Index[SU2D],Index[Generation]}, FlavorIndex->SU2D,
+  (* Leptons: unphysical Weyls *)
+  W[3] == { ClassName->lmw, Unphysical->True, Chirality->Left, SelfConjugate->False, Indices->{Index[Generation]}, FlavorIndex->Generation, QuantumNumbers->{Q->-1}},
+  W[4] == { ClassName->lpw, Unphysical->True, Chirality->Left, SelfConjugate->False, Indices->{Index[Generation]}, FlavorIndex->Generation, QuantumNumbers->{Q-> 1}},
+  W[5] == { ClassName->v0w, Unphysical->True, Chirality->Left, SelfConjugate->False, Indices->{Index[Generation]}, FlavorIndex->Generation},
+  W[6] == { ClassName->N0w, Unphysical->True, Chirality->Left, SelfConjugate->False, Indices->{Index[Generation]}, FlavorIndex->Generation},
+  W[11] == {
+    ClassName->LLw, SelfConjugate->False, Unphysical->True, Chirality->Left, Indices->{Index[SU2D],Index[Generation]}, FlavorIndex->SU2D,
     QuantumNumbers->{Y->-1/2, Yp->-1}
   },
-  F[12] == {
-    ClassName->lR, SelfConjugate->False, Unphysical->True, Indices->{Index[Generation]}, FlavorIndex->Generation,
-    QuantumNumbers->{Y->-1, Yp->-1}
+  W[12] == {
+    ClassName->lRw, SelfConjugate->False, Unphysical->True, Chirality->Left, Indices->{Index[Generation]}, FlavorIndex->Generation,
+    QuantumNumbers->{Y->1, Yp->1}
   },
-  F[13] == {
-    ClassName->vR, SelfConjugate->False, Unphysical->True, Indices->{Index[Generation]}, FlavorIndex->Generation,
-    QuantumNumbers->{Yp->-1}
+  W[13] == {
+    ClassName->vRw, SelfConjugate->False, Unphysical->True, Chirality->Left, Indices->{Index[Generation]}, FlavorIndex->Generation,
+    QuantumNumbers->{Yp->1}
   },
+
+  (* Quarks: unphysical fields *)
   F[21] == {
     ClassName->QL, SelfConjugate->False, Unphysical->True, Indices->{Index[SU2D],Index[Generation], Index[Colour]}, FlavorIndex->SU2D,
     QuantumNumbers->{Y->1/6, Yp->1/3}
@@ -314,7 +324,9 @@ M$Parameters = {
 
 LGauge := -1/4 * Block[{mu,nu,ii}, FS[B,mu,nu]^2 + FS[Wi,mu,nu,ii]^2 + FS[G,mu,nu,ii]^2 + FS[Bp,mu,nu]^2];
 
-LFermions := Plus @@ (Block[{mu}, I*anti[#].Ga[mu].DC[#, mu]] &/@ {QL, LL, uR, dR, lR, vR});
+LFermions := Plus @@ (Block[{mu}, I*anti[#].Ga[mu].DC[#, mu]] &/@ {QL, uR, dR}) \
+    + Block[{mu, sp1, sp2, ii, ff}, I*sibar[mu,sp1,sp2]*LLwbar[sp1,ii,ff].DC[LLw[sp2,ii,ff],mu]]\
+    + Plus @@ (Block[{mu, sp1, sp2, ff}, I*sibar[mu,sp1,sp2]* anti[#][sp1,ff].DC[#[sp2,ff], mu]] &/@ {lRw, vRw})
 
 LHiggs := Block[{mu,ii,jj},
     DC[phibar[ii],mu] DC[phi[ii],mu] + DC[chibar,mu] DC[chi,mu] \
@@ -325,9 +337,9 @@ LHiggs := Block[{mu,ii,jj},
 LYukawa := Block[{sp,ff1,ff2,ii,jj,lag},
   lag = - yd[ff1,ff2] QLbar[sp,ii,ff1,cc].dR[sp,ff2,cc] phi[ii] \
         - yu[ff1,ff2] QLbar[sp,ii,ff1,cc].uR [sp,ff2,cc] phibar[jj] Eps[ii,jj] \
-        - yl[ff1,ff2] LLbar[sp,ii,ff1].lR[sp,ff2] phi[ii] \
-        - yv[ff1,ff2] LLbar[sp,ii,ff1].vR[sp,ff2] phibar[jj] Eps[ii,jj] \
-        - yN[ff1,ff2] CC[vRbar][sp,ff1].vR[sp,ff2] chi ;
+        - yl[ff1,ff2] LLw[sp,ii,ff1].lRw[sp,ff2] phibar[ii] \
+        - yv[ff1,ff2] LLw[sp,ii,ff1].vRw[sp,ff2] phi[jj] Eps[ii,jj] \
+        - yN[ff1,ff2] vRw[sp,ff1].vRw[sp,ff2] chibar ;
   Return[lag + HC[lag]];
 ];
 
